@@ -8,7 +8,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthServiceService {
+export class AuthService {
   private currentUser: any;
   constructor(
     private fireStore: AngularFirestore,
@@ -47,9 +47,7 @@ export class AuthServiceService {
       this.fireAuth.createUserWithEmailAndPassword(email, password)
     ).pipe(
       map((user: firebase.auth.UserCredential) => {
-        this.SendVerificationMail().subscribe((_) => {
-          console.log('mail sent');
-        });
+        this.SendVerificationMail().subscribe();
         return user;
       })
     );
@@ -65,5 +63,11 @@ export class AuthServiceService {
 
   signOut(): Observable<void> {
     return from(this.fireAuth.signOut());
+  }
+
+  // Returns true when user is looged in and email is verified
+  get isLoggedIn(): boolean {
+    const user = JSON.parse(localStorage.getItem('user'));
+    return user !== null && user.emailVerified !== false ? true : false;
   }
 }
