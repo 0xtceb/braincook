@@ -7,11 +7,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from '../environments/environment';
-import { LoginComponent } from './auth/login/login.component';
-import { SigninComponent } from './auth/signin/signin.component';
+import { components, providers } from './index';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, SigninComponent],
+  declarations: [AppComponent, ...components],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -19,7 +18,7 @@ import { SigninComponent } from './auth/signin/signin.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule
   ],
-  providers: [],
+  providers: [...providers],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
