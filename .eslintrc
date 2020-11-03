@@ -9,12 +9,10 @@
     "prettier"
   ],
   "rules": {
-    "no-useless-constructor": "off",
     "@typescript-eslint/no-empty-function": [
       "error",
-      { "allow": ["constructors"] }
+      { "allow": ["constructors", "functions", "methods"] }
     ],
-    "no-empty-function": ["error", { "allow": ["constructors"] }],
     "no-console": 0, // Means warning
     "prettier/prettier": 2 // Means error
   }
