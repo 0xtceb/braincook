@@ -6,7 +6,6 @@ export const environment = {
     databaseURL: 'https://braincook-35256.firebaseio.com/',
     projectId: 'braincook-35256',
     storageBucket: 'gs://braincook-35256.appspot.com',
-    messagingSenderId: 'xxxxxx',
     appId: '301190514841'
   }
 };
