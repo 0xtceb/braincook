@@ -46,7 +46,6 @@ testem.log
 Thumbs.db
 
 # application conf
-/src/environments
 *firebase*
 database.rules.json
 firestore.indexes.json
