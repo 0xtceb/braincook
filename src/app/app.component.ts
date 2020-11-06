@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService, SigninComponent } from './index';
+import { AuthService } from './index';
 import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-root',
