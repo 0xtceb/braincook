@@ -9,12 +9,9 @@ import { AngularFirestore } from '@angular/fire/firestore';
   providedIn: 'root'
 })
 export class AuthService {
-  private currentUser: any;
-  constructor(
-    private fireStore: AngularFirestore,
-    private fireAuth: AngularFireAuth
-  ) {
-    this.fireAuth.authState.subscribe((user) => {
+  private currentUser: firebase.User;
+  constructor(private fireStore: AngularFirestore, private fireAuth: AngularFireAuth) {
+    this.fireAuth.authState.subscribe((user: firebase.User) => {
       if (user) {
         this.currentUser = user;
         localStorage.setItem('user', JSON.stringify(this.currentUser));
@@ -26,28 +23,20 @@ export class AuthService {
     });
   }
 
-  signIn(
-    email: string,
-    password: string
-  ): Observable<firebase.auth.UserCredential> {
+  signIn(email: string, password: string): Observable<firebase.auth.UserCredential> {
     return from(this.fireAuth.signInWithEmailAndPassword(email, password));
   }
 
   signInGoogle(): Observable<firebase.auth.UserCredential> {
-    return from(
-      this.fireAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
-    );
+    return from(this.fireAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider()));
   }
 
-  signUp(
-    email: string,
-    password: string
-  ): Observable<firebase.auth.UserCredential> {
-    return from(
-      this.fireAuth.createUserWithEmailAndPassword(email, password)
-    ).pipe(
+  signUp(email: string, password: string): Observable<firebase.auth.UserCredential> {
+    return from(this.fireAuth.createUserWithEmailAndPassword(email, password)).pipe(
       map((user: firebase.auth.UserCredential) => {
         this.SendVerificationMail().subscribe();
+        this.currentUser = user.user;
+        localStorage.setItem('user', JSON.stringify(this.currentUser));
         return user;
       })
     );
@@ -62,12 +51,17 @@ export class AuthService {
   }
 
   signOut(): Observable<void> {
-    return from(this.fireAuth.signOut());
+    return from(this.fireAuth.signOut()).pipe(
+      map(() => {
+        localStorage.clear();
+        this.currentUser = null;
+      })
+    );
   }
 
   // Returns true when user is looged in and email is verified
   get isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem('user'));
-    return user !== null && user.emailVerified !== false ? true : false;
+    const user: firebase.User = JSON.parse(localStorage.getItem('user'));
+    return user && user.emailVerified ? true : false;
   }
 }

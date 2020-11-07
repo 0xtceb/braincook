@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, ValidatorFn } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from '../../index';
+
 export function MustMatch(controlName: string, matchingControlName: string): ValidatorFn {
   return (formGroup: FormGroup) => {
     const control = formGroup.controls[controlName];
@@ -20,6 +21,7 @@ export function MustMatch(controlName: string, matchingControlName: string): Val
     }
   };
 }
+
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -49,7 +51,7 @@ export class SignupComponent implements OnInit {
   constructor(private dialogRef: MatDialogRef<SignupComponent>, private auth: AuthService) {}
 
   ngOnInit(): void {
-    this.signUpForm.get('password').valueChanges.subscribe((_) => {
+    this.signUpForm.get('password').valueChanges.subscribe(() => {
       if (this.signUpForm.get('password').valid) {
         this.signUpForm.get('confirmPassword').enable();
       } else {
@@ -64,8 +66,8 @@ export class SignupComponent implements OnInit {
       this.dialogRef.disableClose = true;
       this.loading = true;
       this.signUpForm.disable();
-      this.auth.signUp(this.signUpForm.get('email').value, this.signUpForm.get('password').value).subscribe((_) => {
-        this.dialogRef.close();
+      this.auth.signUp(this.signUpForm.get('email').value, this.signUpForm.get('password').value).subscribe(() => {
+        this.dialogRef.close('mailSent');
       });
     } else {
       this.signUpForm.markAllAsTouched();

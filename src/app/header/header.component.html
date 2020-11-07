@@ -4,11 +4,14 @@
   </button>
   <span>Braincook</span>
   <span class="spacer"></span>
-  <button mat-icon-button *ngIf="!this.loggedIn" matTooltip="Sign in" (click)="signIn()">
+  <button mat-icon-button *ngIf="!auth.isLoggedIn" matTooltip="Sign in" (click)="signIn()">
     <mat-icon>login</mat-icon>
   </button>
-  <button mat-icon-button *ngIf="this.loggedIn" matTooltip="Profile"><mat-icon>person</mat-icon></button>
-  <button mat-icon-button *ngIf="!this.loggedIn" matTooltip="Sign up" (click)="signUp()">
+  <button mat-icon-button *ngIf="!auth.isLoggedIn" matTooltip="Sign up" (click)="signUp()">
     <mat-icon>person_add</mat-icon>
+  </button>
+  <button mat-icon-button *ngIf="auth.isLoggedIn" matTooltip="Profile"><mat-icon>person</mat-icon></button>
+  <button mat-icon-button *ngIf="auth.isLoggedIn" (click)="logout()" matTooltip="Logout">
+    <mat-icon>logout</mat-icon>
   </button>
 </mat-toolbar>

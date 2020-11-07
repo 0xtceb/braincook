@@ -8,7 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class AppComponent implements OnInit {
   title = 'braincook';
-  constructor(private auth: AuthService, private dialog: MatDialog) {}
+  constructor(public auth: AuthService, private dialog: MatDialog) {}
 
   ngOnInit(): void {}
 }
