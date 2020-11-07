@@ -1,1 +1,43 @@
-<p>signup works!</p>
+<h1 mat-dialog-title>Create your account</h1>
+<mat-dialog-content>
+  <div>
+    <mat-form-field [formGroup]="signUpForm">
+      <mat-label>Email</mat-label>
+      <input required matInput autocomplete="email" #mailControl formControlName="email" />
+      <button mat-icon-button matSuffix [disabled]="loading" (click)="clearMail()"><mat-icon>close</mat-icon></button>
+      <mat-error *ngIf="signUpForm.controls.email.errors?.required">This field is required</mat-error>
+      <mat-error *ngIf="signUpForm.controls.email.errors?.email">Please enter a valid email address</mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field [formGroup]="signUpForm">
+      <mat-label>Password</mat-label>
+      <input required type="password" matInput autocomplete="new-password" formControlName="password" />
+      <mat-error *ngIf="signUpForm.controls.password.errors?.required">This field is required</mat-error>
+      <mat-error *ngIf="signUpForm.controls.password.errors?.pattern">
+        Your password must contain at least one lowercase letter one capital letter, one number and one special
+        character
+      </mat-error>
+      <mat-error *ngIf="signUpForm.controls.password.errors?.minlength">
+        Your password must be at least 8 characters long
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field [formGroup]="signUpForm">
+      <mat-label>Confirm your password</mat-label>
+      <input required type="password" matInput autocomplete="new-password" formControlName="confirmPassword" />
+      <mat-error *ngIf="signUpForm.controls.confirmPassword.errors?.required">This field is required</mat-error>
+      <mat-error *ngIf="signUpForm.controls.confirmPassword.errors?.mustMatch">
+        You must type the same password twice
+      </mat-error>
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button [disabled]="loading" mat-raised-button mat-dialog-close>Close</button>
+  <button mat-raised-button class="mat-primary" (click)="signUp()" *ngIf="!loading" cdkFocusInitial>Sign up</button>
+  <button mat-icon-button disabled class="loading-button" *ngIf="loading">
+    <mat-spinner *ngIf="loading" [diameter]="30"></mat-spinner>
+  </button>
+</mat-dialog-actions>
