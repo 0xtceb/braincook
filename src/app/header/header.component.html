@@ -1,17 +1,20 @@
 <mat-toolbar color="primary">
-  <button mat-icon-button matTooltip="Menu">
+  <button mat-icon-button (click)="toggleNav()" matTooltip="Menu">
     <mat-icon>menu</mat-icon>
   </button>
   <span>Braincook</span>
   <span class="spacer"></span>
-  <button mat-icon-button *ngIf="!auth.isLoggedIn" matTooltip="Sign in" (click)="signIn()">
+  <button mat-icon-button *ngIf="!auth.isLoggedIn" matTooltip="{{ 'Sign in' | translate }}" (click)="signIn()">
     <mat-icon>login</mat-icon>
   </button>
-  <button mat-icon-button *ngIf="!auth.isLoggedIn" matTooltip="Sign up" (click)="signUp()">
+  <button mat-icon-button *ngIf="!auth.isLoggedIn" matTooltip="{{ 'Sign up' | translate }}" (click)="signUp()">
     <mat-icon>person_add</mat-icon>
   </button>
-  <button mat-icon-button *ngIf="auth.isLoggedIn" matTooltip="Profile"><mat-icon>person</mat-icon></button>
+  <button mat-icon-button *ngIf="auth.isLoggedIn" matTooltip="{{ 'Profile' | translate }}">
+    <mat-icon>person</mat-icon>
+  </button>
   <button mat-icon-button *ngIf="auth.isLoggedIn" (click)="logout()" matTooltip="Logout">
     <mat-icon>logout</mat-icon>
   </button>
 </mat-toolbar>
+<app-menu [openNav]="this.openMenu"></app-menu>

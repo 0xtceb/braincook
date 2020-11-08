@@ -7,11 +7,10 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from '../environments/environment';
 import { components, providers, modules } from './index';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
-  declarations: [AppComponent, ...components, DashboardComponent, MenuComponent],
+  declarations: [AppComponent, ...components, MenuComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
