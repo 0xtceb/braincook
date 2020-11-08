@@ -24,7 +24,12 @@ export class AuthService {
   }
 
   signIn(email: string, password: string): Observable<firebase.auth.UserCredential> {
-    return from(this.fireAuth.signInWithEmailAndPassword(email, password));
+    return from(this.fireAuth.signInWithEmailAndPassword(email, password)).pipe(
+      map((user: firebase.auth.UserCredential) => {
+        this.refreshUser(user);
+        return user;
+      })
+    );
   }
 
   signInGoogle(): Observable<firebase.auth.UserCredential> {
@@ -63,5 +68,11 @@ export class AuthService {
   get isLoggedIn(): boolean {
     const user: firebase.User = JSON.parse(localStorage.getItem('user'));
     return user && user.emailVerified ? true : false;
+  }
+
+  refreshUser(user: firebase.auth.UserCredential): void {
+    this.currentUser = user.user;
+    localStorage.setItem('user', JSON.stringify(this.currentUser));
+    JSON.parse(localStorage.getItem('user'));
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './index';
-import { MatDialog } from '@angular/material/dialog';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,7 +8,10 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class AppComponent implements OnInit {
   title = 'braincook';
-  constructor(public auth: AuthService, private dialog: MatDialog) {}
+  constructor(public auth: AuthService, private translate: TranslateService) {
+    translate.setDefaultLang(this.translate.getBrowserLang());
+    translate.use(this.translate.getBrowserLang());
+  }
 
   ngOnInit(): void {}
 }

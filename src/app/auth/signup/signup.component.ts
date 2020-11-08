@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, ValidatorFn } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { AuthService } from '../../index';
 
 export function MustMatch(controlName: string, matchingControlName: string): ValidatorFn {
@@ -29,7 +31,6 @@ export function MustMatch(controlName: string, matchingControlName: string): Val
 })
 export class SignupComponent implements OnInit {
   loading = false;
-
   signUpForm: FormGroup = new FormGroup(
     {
       email: new FormControl('', { validators: [Validators.required, Validators.email] }),
@@ -66,9 +67,17 @@ export class SignupComponent implements OnInit {
       this.dialogRef.disableClose = true;
       this.loading = true;
       this.signUpForm.disable();
-      this.auth.signUp(this.signUpForm.get('email').value, this.signUpForm.get('password').value).subscribe(() => {
-        this.dialogRef.close('mailSent');
-      });
+      this.auth
+        .signUp(this.signUpForm.get('email').value, this.signUpForm.get('password').value)
+        .pipe(
+          catchError((err) => {
+            this.dialogRef.close(err.code);
+            return throwError(err);
+          })
+        )
+        .subscribe(() => {
+          this.dialogRef.close('mailSent');
+        });
     } else {
       this.signUpForm.markAllAsTouched();
     }

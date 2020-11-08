@@ -16,7 +16,11 @@
     </mat-form-field>
   </div>
 </mat-dialog-content>
+
 <mat-dialog-actions align="end">
   <button mat-flat-button [mat-dialog-close]>Close</button>
-  <button mat-raised-button class="mat-primary" (click)="signIn()" cdkFocusInitial>Sign in</button>
+  <button *ngIf="!loading" mat-raised-button class="mat-primary" (click)="signIn()" cdkFocusInitial>Sign in</button>
+  <button mat-icon-button disabled class="loading-button" *ngIf="loading">
+    <mat-spinner *ngIf="loading" [diameter]="30"></mat-spinner>
+  </button>
 </mat-dialog-actions>
