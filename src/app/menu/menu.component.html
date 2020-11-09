@@ -1,12 +1,29 @@
 <mat-sidenav-container>
   <mat-sidenav mode="side">
     <mat-selection-list [multiple]="false">
-      <mat-list-option> Weekly meels</mat-list-option>
-      <mat-list-option> New recipe</mat-list-option>
-      <mat-list-option> Groceries</mat-list-option>
+      <mat-list-option (click)="open('calendar')">
+        <mat-icon mat-list-icon>calendar_today</mat-icon>
+        {{ 'Weekly meals' | translate }}
+      </mat-list-option>
+      <mat-list-option (click)="open('recipe')">
+        <mat-icon mat-list-icon>cake</mat-icon>{{ 'New recipe' | translate }}
+      </mat-list-option>
+      <mat-list-option (click)="open('recipesList')">
+        <mat-icon mat-list-icon>list_alt</mat-icon>
+        {{ 'Your recipes' | translate }}
+      </mat-list-option>
+      <mat-list-option (click)="open('groceries')">
+        <mat-icon mat-list-icon>shopping_cart</mat-icon>{{ 'Groceries' | translate }}
+      </mat-list-option>
+      <mat-list-option (click)="open('fridge')">
+        <mat-icon mat-list-icon>sensor_door</mat-icon>
+        {{ 'Fridge' | translate }}
+      </mat-list-option>
     </mat-selection-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <div class="menu-content">test</div>
+    <div class="menu-content">
+      <app-edit-recipe *ngIf="openedMenu === 'recipe'"></app-edit-recipe>
+    </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

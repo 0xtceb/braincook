@@ -1,5 +1,5 @@
 <mat-toolbar color="primary">
-  <button mat-icon-button (click)="toggleNav()" matTooltip="Menu">
+  <button mat-icon-button [disabled]="!auth.isLoggedIn" (click)="toggleNav()" matTooltip="Menu">
     <mat-icon>menu</mat-icon>
   </button>
   <span>Braincook</span>
@@ -17,4 +17,4 @@
     <mat-icon>logout</mat-icon>
   </button>
 </mat-toolbar>
-<app-menu [openNav]="this.openMenu"></app-menu>
+<app-menu [openNav]="this.openMenu && auth.isLoggedIn"></app-menu>
