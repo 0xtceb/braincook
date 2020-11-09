@@ -9,7 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class AppComponent implements OnInit {
   title = 'braincook';
   constructor(public auth: AuthService, private translate: TranslateService) {
-    translate.setDefaultLang(this.translate.getBrowserLang());
+    translate.setDefaultLang('en');
     translate.use(this.translate.getBrowserLang());
   }
 

@@ -7,16 +7,17 @@ import { MatSidenav } from '@angular/material/sidenav';
 })
 export class MenuComponent implements OnInit {
   @ViewChild(MatSidenav) menu: MatSidenav;
-
-  private navOpened: boolean;
-
+  openedMenu = '';
   @Input() set openNav(open: boolean) {
     if (this.menu) {
-      this.navOpened = open;
       this.menu.toggle(open);
     }
   }
   constructor() {}
 
   ngOnInit(): void {}
+
+  open(menuName: string): void {
+    this.openedMenu = menuName;
+  }
 }

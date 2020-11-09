@@ -64,7 +64,6 @@ export class AuthService {
     );
   }
 
-  // Returns true when user is looged in and email is verified
   get isLoggedIn(): boolean {
     const user: firebase.User = JSON.parse(localStorage.getItem('user'));
     return user && user.emailVerified ? true : false;

@@ -8,9 +8,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from '../environments/environment';
 import { components, providers, modules } from './index';
 import { MenuComponent } from './menu/menu.component';
+import { EditRecipeComponent } from './recipes/edit-recipe/edit-recipe.component';
+import { RecipeComponent } from './recipes/recipe/recipe.component';
 
 @NgModule({
-  declarations: [AppComponent, ...components, MenuComponent],
+  declarations: [AppComponent, ...components, MenuComponent, EditRecipeComponent, RecipeComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
