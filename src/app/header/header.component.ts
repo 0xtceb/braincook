@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SigninComponent, SignupComponent } from '../auth/index';
-import { AuthService } from '../index';
+import { AuthService } from '../services/auth-service/auth.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',

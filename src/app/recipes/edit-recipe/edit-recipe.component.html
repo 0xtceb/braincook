@@ -1,11 +1,30 @@
-<mat-toolbar>
-  <mat-toolbar-row>
-    <h3>{{ 'Add a new recipe and show us your cooking skill !' | translate }}</h3>
-  </mat-toolbar-row>
-</mat-toolbar>
-<mat-grid-list cols="2" rowHeight="2:1">
-  <mat-grid-tile>1</mat-grid-tile>
-  <mat-grid-tile>2</mat-grid-tile>
-  <mat-grid-tile>3</mat-grid-tile>
-  <mat-grid-tile>4</mat-grid-tile>
-</mat-grid-list>
+<div>
+  <h4>Add a name to your recipe !</h4>
+  <mat-form-field class="recipeTitle">
+    <mat-label>Recipe's name</mat-label>
+    <input matInput #recipeName required [formControl]="recipeNameControl" />
+    <mat-error *ngIf="recipeNameControl.errors?.required">This field is required</mat-error>
+  </mat-form-field>
+</div>
+<mat-divider></mat-divider>
+<div>
+  <h4>Add some ingredients !</h4>
+  <ng-container *ngFor="let ingredient of ingredients">
+    <mat-form-field class="ingredientName">
+      <mat-label>Ingredient</mat-label>
+      <input matInput [(ngModel)]="ingredient.name" />
+    </mat-form-field>
+    <mat-form-field class="ingredientQuantity">
+      <mat-label>Quantity</mat-label>
+      <input matInput type="number" [(ngModel)]="ingredient.quantity" inputmode="numeric" />
+    </mat-form-field>
+    <mat-form-field class="ingredientQuantity">
+      <mat-label>Unity</mat-label>
+      <mat-select>
+        <mat-option value="Gram">{{ 'Gram' | translate }}</mat-option>
+        <mat-option value="Milliliter">{{ 'milliliter' | translate }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </ng-container>
+  <button mat-button (click)="addIngredient()">{{ 'Add an ingredient' | translate }}</button>
+</div>

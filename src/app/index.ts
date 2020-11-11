@@ -19,7 +19,8 @@ import { MatListModule } from '@angular/material/list';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-
+import { MatSelectModule } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
 export * from './auth/index';
 export * from './services/index';
 
@@ -42,6 +43,8 @@ export const modules = [
   MatSidenavModule,
   MatListModule,
   HttpClientModule,
+  MatSelectModule,
+  FormsModule,
   TranslateModule.forRoot({
     loader: {
       provide: TranslateLoader,

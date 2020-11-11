@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, EventEmitter, Output } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 @Component({
   selector: 'app-menu',
@@ -13,11 +13,14 @@ export class MenuComponent implements OnInit {
       this.menu.toggle(open);
     }
   }
+  @Output() closedEvent = new EventEmitter();
   constructor() {}
 
   ngOnInit(): void {}
 
   open(menuName: string): void {
     this.openedMenu = menuName;
+    this.menu.toggle(false);
+    this.closedEvent.emit();
   }
 }

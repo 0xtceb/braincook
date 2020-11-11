@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators, ValidatorFn } from '@angular/forms'
 import { MatDialogRef } from '@angular/material/dialog';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { AuthService } from '../../index';
+import { AuthService } from '../../services/auth-service/auth.service';
 
 export function MustMatch(controlName: string, matchingControlName: string): ValidatorFn {
   return (formGroup: FormGroup) => {
