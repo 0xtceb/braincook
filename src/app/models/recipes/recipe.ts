@@ -4,6 +4,7 @@ import { Deserializable } from '../../interfaces';
 export class Recipe implements Deserializable {
   name: string;
   ingredients: Ingredient[];
+  description: string;
 
   constructor(jsonRecipe?: Recipe) {
     if (jsonRecipe) {

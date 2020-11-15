@@ -19,3 +19,12 @@
   width: 10%;
   margin-right: 10px;
 }
+
+::ng-deep .ql-editor {
+  min-height: 300px;
+}
+
+::ng-deep .mat-horizontal-content-container {
+  max-height: 80vh;
+  overflow-y: auto !important;
+}
