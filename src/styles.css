@@ -9,6 +9,7 @@ body {
   font-family: Roboto, 'Helvetica Neue', sans-serif;
   overflow-y: hidden;
 }
+
 .spacer {
   flex: 1 1 auto;
 }
@@ -28,8 +29,8 @@ body {
   }
   .ingredientPanel {
     border-bottom: 1px solid;
-    border-radius: 5px;
-    margin-bottom: 10px;
+    border-color: black;
+    margin-bottom: 50px;
   }
 }
 

@@ -22,9 +22,13 @@
 
 ::ng-deep .ql-editor {
   min-height: 300px;
+  margin-bottom: 10px;
 }
 
-::ng-deep .mat-horizontal-content-container {
-  max-height: 80vh;
-  overflow-y: auto !important;
+.editor-actions {
+  margin-bottom: 100px;
+}
+
+.ingredient-actions {
+  margin-bottom: 10px;
 }

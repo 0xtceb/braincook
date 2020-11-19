@@ -1,4 +1,4 @@
-<mat-horizontal-stepper linear #stepper>
+<mat-vertical-stepper linear #stepper>
   <mat-step [stepControl]="recipeNameControl" errorMessage="Name is required.">
     <ng-template matStepLabel>Add a name to your recipe</ng-template>
     <mat-form-field class="recipeTitle">
@@ -31,10 +31,8 @@
         </mat-form-field>
       </div>
     </ng-container>
-    <div>
+    <div class="ingredient-actions">
       <button mat-button (click)="addIngredient()">{{ 'Add an ingredient' | translate }}</button>
-    </div>
-    <div>
       <button mat-button matStepperPrevious>Previous</button>
       <button mat-button matStepperNext>Next</button>
     </div>
@@ -42,5 +40,8 @@
   <mat-step>
     <ng-template matStepLabel>Describe your recipe !</ng-template>
     <quill-editor> </quill-editor>
+    <div class="editor-actions">
+      <button (click)="save()" mat-raised-button color="primary">Save</button>
+    </div>
   </mat-step>
-</mat-horizontal-stepper>
+</mat-vertical-stepper>

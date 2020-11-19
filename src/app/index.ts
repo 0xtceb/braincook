@@ -23,6 +23,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import { MatStepperModule } from '@angular/material/stepper';
 import { QuillModule } from 'ngx-quill';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 export * from './auth/index';
 export * from './services/index';
 
@@ -46,6 +47,7 @@ export const modules = [
   MatListModule,
   HttpClientModule,
   MatSelectModule,
+  AngularFireDatabaseModule,
   FormsModule,
   MatStepperModule,
   QuillModule.forRoot({
