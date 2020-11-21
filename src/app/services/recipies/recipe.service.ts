@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import firebase from 'firebase/app';
-import { AngularFireDatabase, AngularFireObject, AngularFireList } from '@angular/fire/database';
+import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { from, Observable } from 'rxjs';
 import { Recipe } from '../../models';
 @Injectable({
