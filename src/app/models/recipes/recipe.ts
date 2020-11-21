@@ -7,14 +7,12 @@ export class Recipe implements Deserializable {
   description: string;
 
   constructor(jsonRecipe?: Recipe) {
-    if (jsonRecipe) {
-      this.deserialize(jsonRecipe);
-      this.ingredients = jsonRecipe.ingredients.map((ingredient) => new Ingredient(ingredient));
-    }
+    if (jsonRecipe) this.deserialize(jsonRecipe);
   }
 
   deserialize(input: Recipe): this {
-    Object.apply(this, input);
+    Object.assign(this, input);
+    this.ingredients = input.ingredients.map((ingredient) => new Ingredient(ingredient));
     return this;
   }
 }

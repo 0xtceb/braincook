@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Ingredient, Recipe } from '../../models';
 import { FormControl, Validators } from '@angular/forms';
 import { QuillEditorComponent } from 'ngx-quill';
+import { RecipeService } from '../../services';
+import { Ingredient, Recipe } from '../../models';
+
 @Component({
   selector: 'app-edit-recipe',
   templateUrl: './edit-recipe.component.html',
@@ -14,7 +16,7 @@ export class EditRecipeComponent implements OnInit {
 
   ingredients: Ingredient[] = [new Ingredient()];
 
-  constructor() {}
+  constructor(private recipeService: RecipeService) {}
 
   ngOnInit(): void {}
 
@@ -28,5 +30,6 @@ export class EditRecipeComponent implements OnInit {
     }
     this.recipe.ingredients = this.ingredients;
     this.recipe.description = this.editor.quillEditor.root.innerHTML;
+    this.recipeService.saveRecipe(this.recipe).subscribe();
   }
 }

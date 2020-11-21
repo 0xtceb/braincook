@@ -10,7 +10,7 @@ export class Ingredient implements Deserializable {
   }
 
   deserialize(input: Ingredient): this {
-    Object.apply(this, input);
+    Object.assign(this, input);
     return this;
   }
 }

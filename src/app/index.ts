@@ -24,10 +24,24 @@ import { FormsModule } from '@angular/forms';
 import { MatStepperModule } from '@angular/material/stepper';
 import { QuillModule } from 'ngx-quill';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { RecipeComponent } from './recipes/recipe/recipe.component';
+import { EditRecipeComponent } from './recipes/edit-recipe/edit-recipe.component';
+import { MenuComponent } from './menu/menu.component';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from '../environments/environment';
+
 export * from './auth/index';
 export * from './services/index';
 
-export const components = [SigninComponent, SignupComponent, HeaderComponent];
+export const components = [
+  SigninComponent,
+  SignupComponent,
+  HeaderComponent,
+  MenuComponent,
+  EditRecipeComponent,
+  RecipeComponent
+];
 export const providers = [AuthService];
 export const modules = [
   MatDialogModule,
@@ -50,6 +64,8 @@ export const modules = [
   AngularFireDatabaseModule,
   FormsModule,
   MatStepperModule,
+  AngularFireModule.initializeApp(environment.firebase),
+  AngularFirestoreModule,
   QuillModule.forRoot({
     modules: {
       toolbar: [

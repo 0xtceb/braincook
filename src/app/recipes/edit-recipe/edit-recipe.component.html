@@ -24,7 +24,7 @@
         </mat-form-field>
         <mat-form-field class="ingredientQuantity">
           <mat-label>Unity</mat-label>
-          <mat-select>
+          <mat-select [(ngModel)]="ingredient.unit">
             <mat-option value="Gram">{{ 'Gram' | translate }}</mat-option>
             <mat-option value="Milliliter">{{ 'milliliter' | translate }}</mat-option>
           </mat-select>
