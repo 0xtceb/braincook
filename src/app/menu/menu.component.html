@@ -5,7 +5,7 @@
         <mat-icon mat-list-icon>calendar_today</mat-icon>
         {{ 'Weekly meals' | translate }}
       </mat-list-option>
-      <mat-list-option (click)="open('recipe')">
+      <mat-list-option #editRecipe (click)="open('recipe')">
         <mat-icon mat-list-icon>cake</mat-icon>{{ 'New recipe' | translate }}
       </mat-list-option>
       <mat-list-option (click)="open('recipesList')">
@@ -23,7 +23,8 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <div class="menu-content">
-      <app-edit-recipe *ngIf="openedMenu === 'recipe'"></app-edit-recipe>
+      <app-edit-recipe [recipeToEdit]="recipeToEdit" *ngIf="openedMenu === 'recipe'"></app-edit-recipe>
+      <app-recipe (editEvent)="edit($event)" *ngIf="openedMenu === 'recipesList'"></app-recipe>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

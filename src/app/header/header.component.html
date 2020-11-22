@@ -17,4 +17,4 @@
     <mat-icon>logout</mat-icon>
   </button>
 </mat-toolbar>
-<app-menu [openNav]="this.openMenu && auth.isLoggedIn"></app-menu>
+<app-menu (closedEvent)="this.openMenu = false" [openNav]="this.openMenu && auth.isLoggedIn"></app-menu>

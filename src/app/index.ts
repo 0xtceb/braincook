@@ -16,14 +16,33 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { MatSelectModule } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
+import { MatStepperModule } from '@angular/material/stepper';
+import { QuillModule } from 'ngx-quill';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { RecipeComponent } from './recipes/recipe/recipe.component';
+import { EditRecipeComponent } from './recipes/edit-recipe/edit-recipe.component';
+import { MenuComponent } from './menu/menu.component';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from '../environments/environment';
 
 export * from './auth/index';
 export * from './services/index';
 
-export const components = [SigninComponent, SignupComponent, HeaderComponent];
+export const components = [
+  SigninComponent,
+  SignupComponent,
+  HeaderComponent,
+  MenuComponent,
+  EditRecipeComponent,
+  RecipeComponent
+];
 export const providers = [AuthService];
 export const modules = [
   MatDialogModule,
@@ -42,6 +61,38 @@ export const modules = [
   MatSidenavModule,
   MatListModule,
   HttpClientModule,
+  MatSelectModule,
+  MatCardModule,
+  AngularFireDatabaseModule,
+  FormsModule,
+  MatStepperModule,
+  AngularFireModule.initializeApp(environment.firebase),
+  AngularFirestoreModule,
+  QuillModule.forRoot({
+    modules: {
+      toolbar: [
+        ['bold', 'italic', 'underline', 'strike'], // toggled buttons
+        ['blockquote', 'code-block'],
+
+        [{ header: 1 }, { header: 2 }], // custom button values
+        [{ list: 'ordered' }, { list: 'bullet' }],
+        [{ script: 'sub' }, { script: 'super' }], // superscript/subscript
+        [{ indent: '-1' }, { indent: '+1' }], // outdent/indent
+        [{ direction: 'rtl' }], // text direction
+
+        [{ size: ['small', false, 'large', 'huge'] }], // custom dropdown
+        [{ header: [1, 2, 3, 4, 5, 6, false] }],
+
+        [{ color: [] }, { background: [] }], // dropdown with defaults from theme
+        [{ font: [] }],
+        [{ align: [] }],
+
+        ['clean'], // remove formatting button
+
+        ['link', 'image', 'video'] // link and image, video
+      ]
+    }
+  }),
   TranslateModule.forRoot({
     loader: {
       provide: TranslateLoader,
