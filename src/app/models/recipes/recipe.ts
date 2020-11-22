@@ -2,6 +2,7 @@ import { Ingredient } from '../../models/ingredients/ingredient';
 import { Deserializable } from '../../interfaces';
 
 export class Recipe implements Deserializable {
+  key: string;
   name: string;
   ingredients: Ingredient[];
   description: string;
@@ -12,7 +13,7 @@ export class Recipe implements Deserializable {
 
   deserialize(input: Recipe): this {
     Object.assign(this, input);
-    this.ingredients = input.ingredients.map((ingredient) => new Ingredient(ingredient));
+    if (input.ingredients) this.ingredients = input.ingredients.map((ingredient) => new Ingredient(ingredient));
     return this;
   }
 }

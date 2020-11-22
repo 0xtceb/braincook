@@ -24,6 +24,7 @@
   <mat-sidenav-content>
     <div class="menu-content">
       <app-edit-recipe *ngIf="openedMenu === 'recipe'"></app-edit-recipe>
+      <app-recipe *ngIf="openedMenu === 'recipesList'"></app-recipe>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

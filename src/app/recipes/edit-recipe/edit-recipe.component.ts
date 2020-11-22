@@ -4,7 +4,7 @@ import { QuillEditorComponent } from 'ngx-quill';
 import { RecipeService } from '../../services';
 import { Ingredient, Recipe } from '../../models';
 import { MatStepper } from '@angular/material/stepper';
-
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-edit-recipe',
   templateUrl: './edit-recipe.component.html',
@@ -19,7 +19,7 @@ export class EditRecipeComponent implements OnInit {
 
   ingredients: Ingredient[] = [new Ingredient()];
 
-  constructor(private recipeService: RecipeService) {}
+  constructor(private recipeService: RecipeService, private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {}
 
@@ -39,6 +39,7 @@ export class EditRecipeComponent implements OnInit {
       this.ingredients = [new Ingredient()];
       this.recipe = new Recipe();
       this.stepper.reset();
+      this.snackBar.open('Your recipe was added to your list !', null, { duration: 2000 });
     });
   }
 }

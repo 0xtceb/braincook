@@ -1,1 +1,20 @@
-<p>recipe works!</p>
+<div class="recipe" *ngFor="let recipe of this.recipies | async">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>
+        {{ recipe.name }}
+        <button mat-icon-button (click)="deleteRecipe(recipe)"><mat-icon>delete</mat-icon></button>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-list>
+      <mat-list-item *ngFor="let ingredient of recipe.ingredients">
+        {{ ingredient.name }} {{ ingredient.quantity }} {{ ingredient.unit | translate }}
+      </mat-list-item>
+    </mat-list>
+    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu" />
+    <mat-card-content>
+      <div [innerHTML]="recipe.description"></div>
+    </mat-card-content>
+  </mat-card>
+</div>
