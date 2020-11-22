@@ -1,4 +1,4 @@
-<mat-vertical-stepper linear #stepper>
+<mat-vertical-stepper [linear]="!recipeToEdit" #stepper>
   <mat-step [stepControl]="recipeNameControl" errorMessage="Name is required.">
     <ng-template matStepLabel>Add a name to your recipe</ng-template>
     <mat-form-field class="recipeTitle">
@@ -12,7 +12,7 @@
   </mat-step>
   <mat-step class="ingredientStep">
     <ng-template matStepLabel>Add some ingredients !</ng-template>
-    <ng-container *ngFor="let ingredient of ingredients">
+    <ng-container *ngFor="let ingredient of ingredients; let index = index">
       <div class="ingredientPanel">
         <mat-form-field class="ingredientName">
           <mat-label>Ingredient</mat-label>
@@ -25,10 +25,11 @@
         <mat-form-field class="ingredientQuantity">
           <mat-label>Unity</mat-label>
           <mat-select [(ngModel)]="ingredient.unit">
-            <mat-option value="Gram">{{ 'Gram' | translate }}</mat-option>
-            <mat-option value="Milliliter">{{ 'Milliliter' | translate }}</mat-option>
+            <mat-option value="Gr">{{ 'Gr' | translate }}</mat-option>
+            <mat-option value="Ml">{{ 'Ml' | translate }}</mat-option>
           </mat-select>
         </mat-form-field>
+        <button mat-icon-button (click)="deleteIngredient(index)"><mat-icon>delete</mat-icon></button>
       </div>
     </ng-container>
     <div class="ingredient-actions">
@@ -39,9 +40,10 @@
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Describe your recipe !</ng-template>
-    <quill-editor> </quill-editor>
+    <quill-editor (onEditorCreated)="updateEditor()"> </quill-editor>
     <div class="editor-actions">
-      <button (click)="save()" mat-raised-button color="primary">Save</button>
+      <button *ngIf="!recipe.key" (click)="save()" mat-raised-button color="primary">Save</button>
+      <button *ngIf="recipe.key" (click)="update()" mat-raised-button color="primary">Update</button>
     </div>
   </mat-step>
 </mat-vertical-stepper>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { RecipeService } from '../../services';
 import { Recipe } from '../../models';
 import { Observable } from 'rxjs';
@@ -8,6 +8,8 @@ import { Observable } from 'rxjs';
   styleUrls: ['./recipe.component.css']
 })
 export class RecipeComponent implements OnInit {
+  @Output() editEvent: EventEmitter<Recipe> = new EventEmitter();
+
   recipies: Observable<Recipe[]>;
 
   constructor(private recipeService: RecipeService) {}

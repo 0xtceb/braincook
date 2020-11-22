@@ -3,7 +3,7 @@ import { Deserializable } from '../../interfaces';
 export class Ingredient implements Deserializable {
   name: string;
   quantity: number;
-  unit: 'gram' | 'milliliter';
+  unit: 'Gr' | 'Ml';
 
   constructor(jsonIngredient?: Ingredient) {
     if (jsonIngredient) this.deserialize(jsonIngredient);

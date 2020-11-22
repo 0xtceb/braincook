@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Optional } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { QuillEditorComponent } from 'ngx-quill';
 import { RecipeService } from '../../services';
@@ -13,6 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class EditRecipeComponent implements OnInit {
   @ViewChild(QuillEditorComponent) editor: QuillEditorComponent;
   @ViewChild(MatStepper) stepper: MatStepper;
+  @Optional() @Input() recipeToEdit: Recipe;
 
   recipeNameControl: FormControl = new FormControl('', { validators: [Validators.required] });
   recipe: Recipe = new Recipe();
@@ -21,10 +22,39 @@ export class EditRecipeComponent implements OnInit {
 
   constructor(private recipeService: RecipeService, private snackBar: MatSnackBar) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.recipeToEdit) {
+      this.recipe = this.recipeToEdit;
+      this.ingredients = this.recipe.ingredients;
+      this.recipeNameControl.setValue(this.recipe.name);
+    }
+  }
+
+  updateEditor(): void {
+    if (this.recipeToEdit) {
+      this.editor.writeValue(this.recipeToEdit.description);
+    }
+  }
 
   addIngredient(): void {
     this.ingredients.push(new Ingredient());
+  }
+
+  deleteIngredient(index: number): void {
+    this.ingredients.splice(index, 1);
+  }
+
+  update(): void {
+    if (this.recipeNameControl.valid) {
+      this.recipe.name = this.recipeNameControl.value;
+    }
+    this.recipe.ingredients = this.ingredients;
+    this.recipe.description = this.editor.quillEditor.root.innerHTML;
+
+    this.recipeService.updateRecipe(this.recipe).subscribe(() => {
+      this.stepper.reset();
+      this.snackBar.open('Your recipe was successfully updated !', null, { duration: 2000 });
+    });
   }
 
   save(): void {

@@ -11,7 +11,6 @@ export class RecipeService {
   currentUserId: string;
   recipiesRef: AngularFireList<Recipe>;
   recipies: Recipe[];
-  recipiesSnapshot: any;
   asyncRecipies: BehaviorSubject<Recipe[]> = new BehaviorSubject([]);
   constructor(private database: AngularFireDatabase) {
     this.currentUserId = JSON.parse(localStorage.getItem('user'))['uid'];
@@ -36,6 +35,10 @@ export class RecipeService {
 
   saveRecipe(recipe: Recipe): Observable<firebase.database.Reference> {
     return from(this.recipiesRef.push(recipe));
+  }
+
+  updateRecipe(recipe: Recipe): Observable<void> {
+    return from(this.recipiesRef.update(recipe.key, recipe));
   }
 
   deleteRecipe(recipe: Recipe): void {
