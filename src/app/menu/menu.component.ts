@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, EventEmitter, Output, ChangeDetectorRef } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { MatListItem } from '@angular/material/list';
 import { Recipe } from '../models';
@@ -13,20 +13,19 @@ export class MenuComponent implements OnInit {
   openedMenu = '';
   recipeToEdit: Recipe = null;
   @Input() set openNav(open: boolean) {
+    this.changeDetector.detectChanges();
     if (this.menu) {
       this.menu.toggle(open);
     }
   }
   @Output() closedEvent = new EventEmitter();
-  constructor() {}
+  constructor(private changeDetector: ChangeDetectorRef) {}
 
   ngOnInit(): void {}
 
   open(menuName: string): void {
     this.recipeToEdit = null;
     this.openedMenu = menuName;
-    this.menu.toggle(false);
-    this.closedEvent.emit();
   }
 
   edit(recipe: Recipe): void {
@@ -34,6 +33,5 @@ export class MenuComponent implements OnInit {
     this.editRecipeItem._getHostElement().click();
     this.recipeToEdit = recipe;
     this.openedMenu = 'recipe';
-    this.menu.toggle(true);
   }
 }

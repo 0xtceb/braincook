@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SigninComponent, SignupComponent } from '../auth/index';
@@ -13,7 +13,16 @@ export class HeaderComponent implements OnInit {
   openMenu: boolean;
   constructor(private dialog: MatDialog, public auth: AuthService, private snackBar: MatSnackBar) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.auth.loggedIn.subscribe((logged) => {
+      this.loggedIn = logged;
+      if (logged) {
+        this.openNav();
+      } else {
+        this.closeNav();
+      }
+    });
+  }
 
   signIn(): void {
     const dialogRef: MatDialogRef<SigninComponent> = this.dialog.open(SigninComponent, {
@@ -63,7 +72,11 @@ export class HeaderComponent implements OnInit {
     this.auth.signOut().subscribe();
   }
 
-  toggleNav(): void {
-    this.openMenu = !this.openMenu;
+  openNav(): void {
+    this.openMenu = true;
+  }
+
+  closeNav(): void {
+    this.openMenu = false;
   }
 }

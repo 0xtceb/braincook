@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { from, Observable } from 'rxjs';
+import { from, Observable, BehaviorSubject } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
 import firebase from 'firebase/app';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -10,15 +10,19 @@ import { AngularFirestore } from '@angular/fire/firestore';
 })
 export class AuthService {
   private currentUser: firebase.User;
+  loggedIn: BehaviorSubject<boolean> = new BehaviorSubject(false);
+
   constructor(private fireStore: AngularFirestore, private fireAuth: AngularFireAuth) {
     this.fireAuth.authState.subscribe((user: firebase.User) => {
       if (user) {
         this.currentUser = user;
         localStorage.setItem('user', JSON.stringify(this.currentUser));
         JSON.parse(localStorage.getItem('user'));
+        this.loggedIn.next(true);
       } else {
         localStorage.setItem('user', null);
         JSON.parse(localStorage.getItem('user'));
+        this.loggedIn.next(false);
       }
     });
   }
@@ -73,5 +77,6 @@ export class AuthService {
     this.currentUser = user.user;
     localStorage.setItem('user', JSON.stringify(this.currentUser));
     JSON.parse(localStorage.getItem('user'));
+    this.loggedIn.next(true);
   }
 }

@@ -1,22 +1,27 @@
-<div class="recipe" *ngFor="let recipe of this.recipies | async">
-  <mat-card class="example-card">
-    <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>
-        {{ recipe.name }}
-        <button mat-icon-button (click)="deleteRecipe(recipe)"><mat-icon>delete</mat-icon></button>
-        <button mat-icon-button (click)="editEvent.emit(recipe)"><mat-icon>edit</mat-icon></button>
-      </mat-card-title>
-    </mat-card-header>
-    <mat-list role="list">
-      <mat-list-item role="listitem" *ngFor="let ingredient of recipe.ingredients">
-        <span>{{ ingredient.name }}</span>
-        <span class="quantity">{{ ingredient.quantity }}</span>
-        <span class="unit">{{ ingredient.unit }}</span>
-      </mat-list-item>
-    </mat-list>
-    <mat-card-content>
-      <div [innerHTML]="recipe.description"></div>
-    </mat-card-content>
-  </mat-card>
-</div>
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let recipe of this.recipies | async">
+    <mat-expansion-panel-header>
+      <mat-panel-title> {{ recipe.name }} </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-card class="recipe-detail">
+      <mat-card-header>
+        <mat-card-title>
+          {{ recipe.name }}
+          <mat-divider></mat-divider>
+          <button mat-icon-button (click)="deleteRecipe(recipe)"><mat-icon>delete</mat-icon></button>
+          <button mat-icon-button (click)="editEvent.emit(recipe)"><mat-icon>edit</mat-icon></button>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-list role="list">
+        <mat-list-item role="listitem" *ngFor="let ingredient of recipe.ingredients">
+          <span>{{ ingredient.name }}</span>
+          <span class="quantity">{{ ingredient.quantity }}</span>
+          <span class="unit">{{ ingredient.unit }}</span>
+        </mat-list-item>
+      </mat-list>
+      <mat-card-content>
+        <div [innerHTML]="recipe.description"></div>
+      </mat-card-content>
+    </mat-card>
+  </mat-expansion-panel>
+</mat-accordion>

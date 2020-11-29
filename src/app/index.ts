@@ -31,7 +31,7 @@ import { MenuComponent } from './menu/menu.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
-
+import { MatExpansionModule } from '@angular/material/expansion';
 export * from './auth/index';
 export * from './services/index';
 
@@ -66,6 +66,7 @@ export const modules = [
   AngularFireDatabaseModule,
   FormsModule,
   MatStepperModule,
+  MatExpansionModule,
   AngularFireModule.initializeApp(environment.firebase),
   AngularFirestoreModule,
   QuillModule.forRoot({
