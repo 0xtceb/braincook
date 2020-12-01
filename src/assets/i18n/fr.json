@@ -8,5 +8,17 @@
   "Fridge": "Frigo",
   "Your recipes": "Vos recettes",
   "Gram": "Gramme",
-  "Milliliter": "Millilitre"
+  "Milliliter": "Millilitre",
+  "edit-recipe": {
+    "recipe-name-label": "Ajoutez un nom à votre recette !",
+    "recipe-name-placeholder": "Nom de votre recette",
+    "next-button": "Suivant",
+    "previous-button": "Précédent",
+    "required-error": "Ce champ est requis",
+    "ingredient-name-label": "Ajoutez des ingrédients !",
+    "ingredient-name-placeholder": "Ingredient",
+    "quantity-name-placeholer": "Quantitée",
+    "unity-name-placeholder": "Unitée",
+    "add-ingredient-button": "Ajouter un ingrédient"
+  }
 }

@@ -8,5 +8,17 @@
   "Fridge": "Frigde",
   "Your recipes": "Your recipes",
   "Gram": "Gram",
-  "Milliliter": "Milliliter"
+  "Milliliter": "Milliliter",
+  "edit-recipe": {
+    "recipe-name-label": "Add a name to your recipe !",
+    "recipe-name-placeholder": "Recipe's name",
+    "next-button": "Next",
+    "previous-button": "Previous",
+    "required-error": "This field is required",
+    "ingredient-name-label": "Add some ingredients !",
+    "ingredient-name-placeholder": "Ingredient",
+    "quantity-name-placeholer": "Quantity",
+    "unity-name-placeholder": "Unity",
+    "add-ingredient-button": "Add an ingredient"
+  }
 }

@@ -6,7 +6,7 @@ export class Recipe implements Deserializable {
   name: string;
   ingredients: Ingredient[];
   description: string;
-
+  qualifier: 'normal' | 'light' | 'greasy';
   constructor(jsonRecipe?: Recipe) {
     if (jsonRecipe) this.deserialize(jsonRecipe);
   }

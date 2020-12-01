@@ -32,6 +32,8 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { FlexLayoutModule } from '@angular/flex-layout';
 export * from './auth/index';
 export * from './services/index';
 
@@ -54,6 +56,8 @@ export const modules = [
   MatFormFieldModule,
   MatAutocompleteModule,
   MatInputModule,
+  FlexLayoutModule,
+  MatSlideToggleModule,
   ReactiveFormsModule,
   MatProgressSpinnerModule,
   MatSnackBarModule,
